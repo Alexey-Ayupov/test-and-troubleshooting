@@ -1,0 +1,17 @@
+name: test WSL
+
+on:
+  workflow_dispatch
+  
+jobs:
+  wsl_run:
+    runs-on: windows-2025
+    
+    steps:
+      - shell: pwsh
+        run: |
+          invoke-webrequest -uri "https://releases.ubuntu.com/24.04.3/ubuntu-24.04.3-wsl-amd64.wsl" -outfile "c:\temp\ubn-dst.wsl"
+
+      - shell: pwsh
+        run: |
+          wsl --install --no-launch --from-file "c:\temp\ubn-dst.wsl" --name "ubn-test"
